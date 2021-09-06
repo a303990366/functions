@@ -1,9 +1,6 @@
 from datetime import datetime
 
-class timePackage:
-    def __init__(self,obj):
-        self.source=obj
-        self.type=type(obj)
+class timePackage():
     def stamp2datetime(self,timestamp):
         dt_object = datetime.fromtimestamp(timestamp)
         return dt_object
@@ -22,23 +19,24 @@ class timePackage:
         stamp=self.stamp2datetime(stamp)
         string=self.datetime2str(stamp)
         return string
-    #string ti timestamp
+    #string to timestamp
     def str2stamp(self,string):
         string=self.str2datetime(string)
         return self.datetime2stamp(string)
     #get three format of time's dict
-    def all_items(self):
+    def all_items(self,source):
         items=dict()
+        self.type=type(source)
         if self.type==datetime:
-            items['datetime']=self.source
-            items['timestamp']=self.datetime2stamp(self.source)
-            items['string']=self.datetime2str(self.source)
+            items['datetime']=source
+            items['timestamp']=self.datetime2stamp(source)
+            items['string']=self.datetime2str(source)
         elif self.type==str:
-            items['string']=self.source
-            items['datetime']=self.str2datetime(self.source)
-            items['timestamp']=self.str2stamp(self.source)
+            items['string']=source
+            items['datetime']=self.str2datetime(source)
+            items['timestamp']=self.str2stamp(source)
         elif self.type==float or self.type==int:
-            items['timestamp']=self.source
-            items['datetime']=self.stamp2datetime(self.source)
-            items['string']=self.stamp2str(self.source)
+            items['timestamp']=source
+            items['datetime']=self.stamp2datetime(source)
+            items['string']=self.stamp2str(source)
         return items
